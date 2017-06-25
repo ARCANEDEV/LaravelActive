@@ -2,6 +2,7 @@
 
 use Arcanedev\LaravelActive\Contracts\Active as ActiveContract;
 use Illuminate\Contracts\Config\Repository;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 /**
@@ -179,12 +180,11 @@ class Active implements ActiveContract
      */
     private function parseRoutes(array $allRoutes)
     {
-        return collect($allRoutes)
+        return Collection::make($allRoutes)
             ->partition(function ($route) {
                 return ! Str::startsWith($route, ['not:']);
             })
-            ->transform(function ($routes, $index) {
-                /** @var  \Illuminate\Support\Collection  $routes */
+            ->transform(function (Collection $routes, $index) {
                 return $index === 0 ? $routes : $routes->transform(function ($route) {
                     return substr($route, 4);
                 });
