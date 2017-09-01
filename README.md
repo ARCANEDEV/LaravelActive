@@ -20,15 +20,16 @@ Feel free to check out the [releases](https://github.com/ARCANEDEV/LaravelActive
 
 ## Features
 
-  - Laravel `5.4` is supported.
-  - Well documented package (IDE Friendly).
-  - Well tested (100% code coverage with maximum code quality).
+  * Laravel `5.4` is supported.
+  * Well tested (100% code coverage with maximum code quality).
+  * Well documented &amp; IDE Friendly.
+  * Made with :heart: &amp; :coffee:.
 
 ## Table of contents
 
-  1. [Installation and Setup](_docs/1.Installation-and-Setup.md)
-  2. [Configuration](_docs/2.Configuration.md)
-  3. [Usage](_docs/3.Usage.md)
+  1. [Installation and Setup](_docs/1-Installation-and-Setup.md)
+  2. [Configuration](_docs/2-Configuration.md)
+  3. [Usage](_docs/3-Usage.md)
 
 ## Contribution
 
