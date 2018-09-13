@@ -54,7 +54,7 @@ class LaravelActiveServiceProviderTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $this->provider);
+            static::assertInstanceOf($expected, $this->provider);
         }
     }
 
@@ -65,6 +65,6 @@ class LaravelActiveServiceProviderTest extends TestCase
             \Arcanedev\LaravelActive\Contracts\Active::class,
         ];
 
-        $this->assertSame($expected, $this->provider->provides());
+        static::assertSame($expected, $this->provider->provides());
     }
 }

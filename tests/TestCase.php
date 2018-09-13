@@ -1,6 +1,6 @@
 <?php namespace Arcanedev\LaravelActive\Tests;
 
-use Orchestra\Testbench\BrowserKit\TestCase as BaseTestCase;
+use Orchestra\Testbench\TestCase as BaseTestCase;
 
 /**
  * Class     TestCase
@@ -15,6 +15,13 @@ abstract class TestCase extends BaseTestCase
      | -----------------------------------------------------------------
      */
 
+    /**
+     * Get package providers.
+     *
+     * @param  \Illuminate\Foundation\Application  $app
+     *
+     * @return array
+     */
     protected function getPackageProviders($app)
     {
         return [
@@ -22,6 +29,13 @@ abstract class TestCase extends BaseTestCase
         ];
     }
 
+    /**
+     * Get package aliases.
+     *
+     * @param  \Illuminate\Foundation\Application  $app
+     *
+     * @return array
+     */
     protected function getPackageAliases($app)
     {
         return [
