@@ -1,7 +1,5 @@
 <?php namespace Arcanedev\LaravelActive\Tests;
 
-use Arcanedev\LaravelActive\Active;
-
 /**
  * Class     ActiveTest
  *
@@ -51,28 +49,28 @@ class ActiveTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $this->active);
+            static::assertInstanceOf($expected, $this->active);
         }
     }
 
     /** @test */
     public function it_can_check_if_current_request_is_active()
     {
-        $this->call('GET', 'foo');
+        $this->get('foo');
 
-        $this->assertTrue($this->active->isActive(['foo']));
-        $this->assertTrue($this->active->isPath(['foo']));
-        $this->assertFalse($this->active->isRoute(['foo']));
+        static::assertTrue($this->active->isActive(['foo']));
+        static::assertTrue($this->active->isPath(['foo']));
+        static::assertFalse($this->active->isRoute(['foo']));
     }
 
     /** @test */
     public function it_can_check_if_current_route_is_active()
     {
-        $this->route('GET', 'home');
+        $this->get(route('home'));
 
-        $this->assertTrue($this->active->isActive(['home']));
-        $this->assertTrue($this->active->isRoute(['home']));
-        $this->assertFalse($this->active->isPath(['home']));
+        static::assertTrue($this->active->isActive(['home']));
+        static::assertTrue($this->active->isRoute(['home']));
+        static::assertFalse($this->active->isPath(['home']));
     }
 
     /** @test */
@@ -87,8 +85,8 @@ class ActiveTest extends TestCase
         foreach ($expectations as $uri => $expected) {
             $this->call('GET', $uri);
 
-            $this->assertSame($expected, $this->active->isActive(['foo/*', 'not:foo/qux']));
-            $this->assertFalse($this->active->isRoute(['foo/*']));
+            static::assertSame($expected, $this->active->isActive(['foo/*', 'not:foo/qux']));
+            static::assertFalse($this->active->isRoute(['foo/*']));
         }
     }
 
@@ -102,47 +100,47 @@ class ActiveTest extends TestCase
         ];
 
         foreach ($expectations as $route => $expected) {
-            $this->route('GET', $route);
+            $this->get(route($route));
 
-            $this->assertSame($expected, $this->active->isActive(['pages.*', 'not:pages.show']));
+            static::assertSame($expected, $this->active->isActive(['pages.*', 'not:pages.show']));
         }
     }
 
     /** @test */
     public function it_can_get_active_class_when_it_matches_with_path()
     {
-        $this->assertNull($this->active->active(['blog']));
-        $this->assertNull($this->active->path(['blog']));
+        static::assertNull($this->active->active(['blog']));
+        static::assertNull($this->active->path(['blog']));
 
-        $this->call('GET', 'blog');
+        $this->get('blog');
 
-        $this->assertSame('active', $this->active->active(['blog']));
-        $this->assertSame('is-active', $this->active->active(['blog'], 'is-active'));
+        static::assertSame('active', $this->active->active(['blog']));
+        static::assertSame('is-active', $this->active->active(['blog'], 'is-active'));
 
-        $this->assertSame('active', $this->active->path(['blog']));
-        $this->assertSame('is-active', $this->active->path(['blog'], 'is-active'));
+        static::assertSame('active', $this->active->path(['blog']));
+        static::assertSame('is-active', $this->active->path(['blog'], 'is-active'));
     }
 
     /** @test */
     public function it_can_get_active_class_when_it_matches_with_route()
     {
-        $this->assertNull($this->active->active(['home']));
-        $this->assertNull($this->active->route(['home']));
+        static::assertNull($this->active->active(['home']));
+        static::assertNull($this->active->route(['home']));
 
-        $this->route('GET', 'home');
+        $this->get(route('home'));
 
-        $this->assertSame('active', $this->active->active(['home']));
-        $this->assertSame('is-active', $this->active->active(['home'], 'is-active'));
+        static::assertSame('active', $this->active->active(['home']));
+        static::assertSame('is-active', $this->active->active(['home'], 'is-active'));
 
-        $this->assertSame('active', $this->active->route(['home']));
-        $this->assertSame('is-active', $this->active->route(['home'], 'is-active'));
+        static::assertSame('active', $this->active->route(['home']));
+        static::assertSame('is-active', $this->active->route(['home'], 'is-active'));
     }
 
     /** @test */
     public function it_must_return_false_when_the_given_route_or_path_not_active()
     {
-        $this->assertFalse($this->active->isActive(['404']));
-        $this->assertFalse($this->active->isRoute(['404']));
-        $this->assertFalse($this->active->isPath(['404']));
+        static::assertFalse($this->active->isActive(['404']));
+        static::assertFalse($this->active->isRoute(['404']));
+        static::assertFalse($this->active->isPath(['404']));
     }
 }

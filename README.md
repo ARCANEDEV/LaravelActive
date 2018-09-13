@@ -20,7 +20,7 @@ Feel free to check out the [releases](https://github.com/ARCANEDEV/LaravelActive
 
 ## Features
 
-  * Laravel `5.4 | 5.5` are supported.
+  * Laravel `5.4` to `5.5` are supported.
   * Well tested (100% code coverage with maximum code quality).
   * Well documented &amp; IDE Friendly.
   * Made with :heart: &amp; :coffee:.
