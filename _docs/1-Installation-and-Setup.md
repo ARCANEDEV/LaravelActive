@@ -10,7 +10,7 @@
 
 The LaravelActive package has a few system requirements:
 
-    - PHP >= 7.0
+    - PHP >= 7.1.3
     
 ## Version Compatibility
 
@@ -18,13 +18,15 @@ The LaravelActive package has a few system requirements:
 |:----------------------------------------------|:-----------------------------|
 | ![LaravelActive v1.0.x][laravel_active_1_0_x] | ![Laravel v5.4][laravel_5_4] |
 | ![LaravelActive v1.1.x][laravel_active_1_1_x] | ![Laravel v5.5][laravel_5_5] |
-
+| ![LaravelActive v1.2.x][laravel_active_1_2_x] | ![Laravel v5.6][laravel_5_6] |
 
 [laravel_5_4]:  https://img.shields.io/badge/v5.4-supported-brightgreen.svg?style=flat-square "Laravel v5.4"
 [laravel_5_5]:  https://img.shields.io/badge/v5.5-supported-brightgreen.svg?style=flat-square "Laravel v5.5"
+[laravel_5_6]:  https://img.shields.io/badge/v5.6-supported-brightgreen.svg?style=flat-square "Laravel v5.6"
 
 [laravel_active_1_0_x]:   https://img.shields.io/badge/version-1.0.*-blue.svg?style=flat-square "LaravelActive v1.0.*"
 [laravel_active_1_1_x]:   https://img.shields.io/badge/version-1.1.*-blue.svg?style=flat-square "LaravelActive v1.1.*"
+[laravel_active_1_2_x]:   https://img.shields.io/badge/version-1.2.*-blue.svg?style=flat-square "LaravelActive v1.2.*"
 
 ## Composer
 
