@@ -21,7 +21,7 @@ class Active implements ActiveContract
     /**
      * Illuminate Config instance.
      *
-     * @var \Illuminate\Config\Repository
+     * @var \Illuminate\Contracts\Config\Repository
      */
     protected $config;
 
@@ -154,9 +154,9 @@ class Active implements ActiveContract
     {
         list($routes, $ignored) = $this->parseRoutes($routes);
 
-        return ! $this->isIgnored($ignored)
-            ? call_user_func_array([$object, 'is'], $routes)
-            : false;
+        return $this->isIgnored($ignored)
+            ? false
+            : call_user_func_array([$object, 'is'], $routes);
     }
 
     /**
@@ -166,9 +166,10 @@ class Active implements ActiveContract
      *
      * @return bool
      */
-    private function isIgnored(array $ignored)
+    protected function isIgnored(array $ignored)
     {
-        return count($ignored) && ($this->isPath($ignored) || $this->isRoute($ignored));
+        return count($ignored)
+            && ($this->isPath($ignored) || $this->isRoute($ignored));
     }
 
     /**
@@ -178,16 +179,16 @@ class Active implements ActiveContract
      *
      * @return array
      */
-    private function parseRoutes(array $allRoutes)
+    protected function parseRoutes(array $allRoutes)
     {
         return Collection::make($allRoutes)
             ->partition(function ($route) {
                 return ! Str::startsWith($route, ['not:']);
             })
             ->transform(function (Collection $routes, $index) {
-                return $index === 0 ? $routes : $routes->transform(function ($route) {
-                    return substr($route, 4);
-                });
+                return $index === 0
+                    ? $routes
+                    : $routes->transform(function ($route) { return substr($route, 4); });
             })
             ->toArray();
     }
