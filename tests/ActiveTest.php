@@ -64,6 +64,16 @@ class ActiveTest extends TestCase
     }
 
     /** @test */
+    public function it_can_check_if_current_request_is_active_with_string_value()
+    {
+        $this->get('foo');
+
+        static::assertTrue($this->active->isActive('foo'));
+        static::assertTrue($this->active->isPath('foo'));
+        static::assertFalse($this->active->isRoute('foo'));
+    }
+
+    /** @test */
     public function it_can_check_if_current_route_is_active()
     {
         $this->get(route('home'));
@@ -142,5 +152,27 @@ class ActiveTest extends TestCase
         static::assertFalse($this->active->isActive(['404']));
         static::assertFalse($this->active->isRoute(['404']));
         static::assertFalse($this->active->isPath(['404']));
+    }
+
+    /** @test */
+    public function it_can_fallback_with_custom_inactive_class()
+    {
+        static::assertSame('inactive', $this->active->active('blog', 'active', 'inactive'));
+        static::assertSame('inactive', $this->active->route('blog', 'active', 'inactive'));
+        static::assertSame('inactive', $this->active->path('blog', 'active', 'inactive'));
+    }
+
+    /** @test */
+    public function it_can_fallback_with_custom_inactive_class_from_config_file()
+    {
+        static::assertNull($this->active->active('blog'));
+        static::assertNull($this->active->route('blog'));
+        static::assertNull($this->active->path('blog'));
+
+        $this->app['config']->set('active.fallback-class', 'inactive');
+
+        static::assertSame('inactive', $this->active->active('blog'));
+        static::assertSame('inactive', $this->active->route('blog'));
+        static::assertSame('inactive', $this->active->path('blog'));
     }
 }

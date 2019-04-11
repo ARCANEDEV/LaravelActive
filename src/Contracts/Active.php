@@ -14,59 +14,62 @@ interface Active
      */
 
     /**
-     * Check if any given routes/paths are active.
-     *
-     * @param  array  $routes
-     *
-     * @return bool
-     */
-    public function isActive(array $routes);
-
-    /**
      * Get the active class if the current path/route is active.
      *
-     * @param  array        $routes
-     * @param  string|null  $class
+     * @param  string|array  $routes
+     * @param  string|null   $class
+     * @param  string|null   $fallback
      *
      * @return string|null
      */
-    public function active(array $routes, $class = null);
-
-    /**
-     * Check if the current route is one of the given routes.
-     *
-     * @param  array  $routes
-     *
-     * @return bool
-     */
-    public function isRoute(array $routes);
-
-    /**
-     * Check if the current path is active.
-     *
-     * @param  array  $routes
-     *
-     * @return bool
-     */
-    public function isPath(array $routes);
+    public function active($routes, $class = null, $fallback = null);
 
     /**
      * Get the active class if the current route is in haystack routes.
      *
-     * @param  array        $routes
-     * @param  string|null  $class
+     * @param  string|array  $routes
+     * @param  string|null   $class
+     * @param  string|null   $fallback
      *
      * @return string|null
      */
-    public function route(array $routes, $class = null);
+    public function route($routes, $class = null, $fallback = null);
 
     /**
      * Get the active class if the current path is in haystack paths.
      *
-     * @param  array        $routes
-     * @param  string|null  $class
+     * @param  string|array  $routes
+     * @param  string|null   $class
+     * @param  string|null   $fallback
      *
      * @return string|null
      */
-    public function path(array $routes, $class = null);
+    public function path($routes, $class = null, $fallback = null);
+
+    /**
+     * Check if any given routes/paths are active.
+     *
+     * @param  string|array  $routes
+     *
+     * @return bool
+     */
+    public function isActive($routes);
+
+    /**
+     * Check if the current route is one of the given routes.
+     *
+     * @param  string|array  $routes
+     *
+     * @return bool
+     */
+    public function isRoute($routes);
+
+    /**
+     * Check if the current path is active.
+     *
+     * @param  string|array  $routes
+     *
+     * @return bool
+     */
+    public function isPath($routes);
 }
