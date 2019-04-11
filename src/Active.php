@@ -184,8 +184,8 @@ class Active implements ActiveContract
     /**
      * Check if one the given routes is active.
      *
-     * @param  mixed  $object
-     * @param  array  $routes
+     * @param  mixed         $object
+     * @param  string|array  $routes
      *
      * @return bool
      */
