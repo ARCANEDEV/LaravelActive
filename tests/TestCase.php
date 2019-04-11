@@ -30,20 +30,6 @@ abstract class TestCase extends BaseTestCase
     }
 
     /**
-     * Get package aliases.
-     *
-     * @param  \Illuminate\Foundation\Application  $app
-     *
-     * @return array
-     */
-    protected function getPackageAliases($app)
-    {
-        return [
-            \Arcanedev\LaravelActive\Facades\Active::class,
-        ];
-    }
-
-    /**
      * Define environment setup.
      *
      * @param  \Illuminate\Foundation\Application  $app

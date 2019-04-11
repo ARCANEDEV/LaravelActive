@@ -21,14 +21,14 @@ class ActiveTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
         $this->active = $this->app->make(\Arcanedev\LaravelActive\Contracts\Active::class);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unset($this->active);
 
