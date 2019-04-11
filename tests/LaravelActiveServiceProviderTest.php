@@ -24,14 +24,14 @@ class LaravelActiveServiceProviderTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
         $this->provider = $this->app->getProvider(\Arcanedev\LaravelActive\LaravelActiveServiceProvider::class);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unset($this->provider);
 
