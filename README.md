@@ -1,4 +1,4 @@
-# LaravelActive [![Packagist License][badge_license]](LICENSE.md) [![For Laravel 5][badge_laravel]][link-github-repo]
+# LaravelActive [![Packagist License][badge_license]](LICENSE.md) [![For Laravel][badge_laravel]][link-github-repo]
 
 [![Travis Status][badge_build]][link-travis]
 [![Coverage Status][badge_coverage]][link-scrutinizer]
@@ -20,7 +20,7 @@ Feel free to check out the [releases](https://github.com/ARCANEDEV/LaravelActive
 
 ## Features
 
-  * Laravel `5.4` to `5.8` are supported.
+  * Laravel `5.4` to `6.0` are supported.
   * Well tested (100% code coverage with maximum code quality).
   * Well documented &amp; IDE Friendly.
   * Made with :heart: &amp; :coffee:.
@@ -44,7 +44,7 @@ If you discover any security related issues, please email arcanedev.maroc@gmail.
 - [ARCANEDEV][link-author]
 - [All Contributors][link-contributors]
 
-[badge_laravel]:      https://img.shields.io/badge/Laravel-5.4%20to%205.8-orange.svg?style=flat-square
+[badge_laravel]:      https://img.shields.io/badge/Laravel-5.4%20to%206.0-orange.svg?style=flat-square
 [badge_license]:      https://img.shields.io/packagist/l/arcanedev/laravel-active.svg?style=flat-square
 [badge_build]:        https://img.shields.io/travis/ARCANEDEV/LaravelActive.svg?style=flat-square
 [badge_coverage]:     https://img.shields.io/scrutinizer/coverage/g/ARCANEDEV/LaravelActive.svg?style=flat-square
