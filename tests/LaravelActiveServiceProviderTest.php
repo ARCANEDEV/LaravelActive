@@ -1,8 +1,5 @@
 <?php namespace Arcanedev\LaravelActive\Tests;
 
-use Arcanedev\LaravelActive\LaravelActiveServiceProvider;
-use Arcanedev\Support\PackageServiceProvider;
-
 /**
  * Class     LaravelActiveServiceProviderTest
  *
@@ -48,8 +45,8 @@ class LaravelActiveServiceProviderTest extends TestCase
     {
         $expectations = [
             \Illuminate\Support\ServiceProvider::class,
-            \Arcanedev\Support\ServiceProvider::class,
-            \Arcanedev\Support\PackageServiceProvider::class,
+            \Arcanedev\Support\Providers\ServiceProvider::class,
+            \Arcanedev\Support\Providers\PackageServiceProvider::class,
             \Arcanedev\LaravelActive\LaravelActiveServiceProvider::class,
         ];
 

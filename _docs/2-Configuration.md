@@ -6,4 +6,19 @@
   2. [Configuration](2-Configuration.md)
   3. [Usage](3-Usage.md)
 
-> Coming Soon...
+```php
+<?php
+
+return [
+
+    /* -----------------------------------------------------------------
+     |  Active CSS class
+     | -----------------------------------------------------------------
+     */
+
+    'class' => 'active',
+
+    'fallback-class' => null,
+
+];
+```
