@@ -1,6 +1,7 @@
 <?php namespace Arcanedev\LaravelActive;
 
-use Arcanedev\Support\PackageServiceProvider;
+use Arcanedev\Support\Providers\PackageServiceProvider;
+use Illuminate\Contracts\Support\DeferrableProvider;
 
 /**
  * Class     LaravelActiveServiceProvider
@@ -8,7 +9,7 @@ use Arcanedev\Support\PackageServiceProvider;
  * @package  Arcanedev\LaravelActive
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class LaravelActiveServiceProvider extends PackageServiceProvider
+class LaravelActiveServiceProvider extends PackageServiceProvider implements DeferrableProvider
 {
     /* -----------------------------------------------------------------
      |  Properties
@@ -30,7 +31,7 @@ class LaravelActiveServiceProvider extends PackageServiceProvider
     /**
      * Register the service provider.
      */
-    public function register()
+    public function register(): void
     {
         parent::register();
 
@@ -42,10 +43,8 @@ class LaravelActiveServiceProvider extends PackageServiceProvider
     /**
      * Boot the service provider.
      */
-    public function boot()
+    public function boot(): void
     {
-        parent::boot();
-
         $this->publishConfig();
     }
 
@@ -54,7 +53,7 @@ class LaravelActiveServiceProvider extends PackageServiceProvider
      *
      * @return array
      */
-    public function provides()
+    public function provides(): array
     {
         return [
             Contracts\Active::class,
