@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\LaravelActive\Tests;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\LaravelActive\Tests;
 
 /**
  * Class     HelperTest
@@ -14,7 +18,7 @@ class HelperTest extends TestCase
      */
 
     /** @test */
-    public function it_can_be_instantiated()
+    public function it_can_be_instantiated(): void
     {
         $expectations = [
             \Arcanedev\LaravelActive\Contracts\Active::class,
@@ -27,7 +31,7 @@ class HelperTest extends TestCase
     }
 
     /** @test */
-    public function it_can_check_if_current_request_is_active()
+    public function it_can_check_if_current_request_is_active(): void
     {
         $this->get('foo');
 
@@ -37,7 +41,7 @@ class HelperTest extends TestCase
     }
 
     /** @test */
-    public function it_can_check_if_current_request_is_active_with_string_value()
+    public function it_can_check_if_current_request_is_active_with_string_value(): void
     {
         $this->get('foo');
 
@@ -47,7 +51,7 @@ class HelperTest extends TestCase
     }
 
     /** @test */
-    public function it_can_check_if_current_route_is_active()
+    public function it_can_check_if_current_route_is_active(): void
     {
         $this->get(route('home'));
 
@@ -57,7 +61,7 @@ class HelperTest extends TestCase
     }
 
     /** @test */
-    public function it_can_check_if_current_path_is_active_with_ignored_ones()
+    public function it_can_check_if_current_path_is_active_with_ignored_ones(): void
     {
         $paths        = ['foo/*', 'not:foo/qux'];
         $expectations = [
@@ -78,7 +82,7 @@ class HelperTest extends TestCase
     }
 
     /** @test */
-    public function it_can_check_if_current_route_is_active_with_ignored_ones()
+    public function it_can_check_if_current_route_is_active_with_ignored_ones(): void
     {
         $routes       = ['pages.*', 'not:pages.show'];
         $expectations = [
@@ -99,7 +103,7 @@ class HelperTest extends TestCase
     }
 
     /** @test */
-    public function it_can_get_active_class_when_it_matches_with_path()
+    public function it_can_get_active_class_when_it_matches_with_path(): void
     {
         static::assertNull(active()->active(['blog']));
         static::assertNull(active()->path(['blog']));
@@ -118,7 +122,7 @@ class HelperTest extends TestCase
     }
 
     /** @test */
-    public function it_can_get_active_class_when_it_matches_with_route()
+    public function it_can_get_active_class_when_it_matches_with_route(): void
     {
         static::assertNull(active()->active(['home']));
         static::assertNull(active()->route(['home']));
@@ -137,7 +141,7 @@ class HelperTest extends TestCase
     }
 
     /** @test */
-    public function it_must_return_false_when_the_given_route_or_path_not_active()
+    public function it_must_return_false_when_the_given_route_or_path_not_active(): void
     {
         static::assertFalse(active()->isActive(['404']));
         static::assertFalse(is_active(['404']));
@@ -146,7 +150,7 @@ class HelperTest extends TestCase
     }
 
     /** @test */
-    public function it_can_fallback_with_custom_inactive_class()
+    public function it_can_fallback_with_custom_inactive_class(): void
     {
         static::assertSame('inactive', active('blog', 'active', 'inactive'));
         static::assertSame('inactive', active()->route('blog', 'active', 'inactive'));
@@ -154,7 +158,7 @@ class HelperTest extends TestCase
     }
 
     /** @test */
-    public function it_can_fallback_with_custom_inactive_class_from_config_file()
+    public function it_can_fallback_with_custom_inactive_class_from_config_file(): void
     {
         static::assertNull(active('blog'));
         static::assertNull(active()->route('blog'));

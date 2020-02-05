@@ -1,10 +1,12 @@
-<?php namespace Arcanedev\LaravelActive;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\LaravelActive;
 
 use Arcanedev\LaravelActive\Contracts\Active as ActiveContract;
 use Illuminate\Contracts\Config\Repository;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
+use Illuminate\Support\{Arr, Collection, Str};
 
 /**
  * Class     Active
@@ -82,7 +84,7 @@ class Active implements ActiveContract
      *
      * @return bool
      */
-    public function isActive($routes)
+    public function isActive($routes): bool
     {
         return $this->isPath($routes)
             || $this->isRoute($routes);
@@ -143,7 +145,7 @@ class Active implements ActiveContract
      *
      * @return bool
      */
-    public function isRoute($routes)
+    public function isRoute($routes): bool
     {
         return $this->is(app('router'), $routes);
     }
@@ -155,7 +157,7 @@ class Active implements ActiveContract
      *
      * @return bool
      */
-    public function isPath($routes)
+    public function isPath($routes): bool
     {
         return $this->is(app('request'), $routes);
     }
@@ -174,7 +176,7 @@ class Active implements ActiveContract
      *
      * @return string|null
      */
-    protected function getCssClass($condition, $class, $fallback)
+    protected function getCssClass($condition, $class, $fallback): ?string
     {
         return $condition
             ? $this->getActiveClass($class)
@@ -189,13 +191,15 @@ class Active implements ActiveContract
      *
      * @return bool
      */
-    protected function is($object, $routes)
+    protected function is($object, $routes): bool
     {
         list($routes, $ignored) = $this->parseRoutes(Arr::wrap($routes));
 
-        return $this->isIgnored($ignored)
-            ? false
-            : call_user_func_array([$object, 'is'], $routes);
+        if ($this->isIgnored($ignored)) {
+            return false;
+        }
+
+        return call_user_func_array([$object, 'is'], $routes);
     }
 
     /**
@@ -205,7 +209,7 @@ class Active implements ActiveContract
      *
      * @return bool
      */
-    protected function isIgnored(array $ignored)
+    protected function isIgnored(array $ignored): bool
     {
         return count($ignored)
             && ($this->isPath($ignored) || $this->isRoute($ignored));
@@ -218,16 +222,20 @@ class Active implements ActiveContract
      *
      * @return array
      */
-    protected function parseRoutes(array $allRoutes)
+    protected function parseRoutes(array $allRoutes): array
     {
         return Collection::make($allRoutes)
             ->partition(function ($route) {
                 return ! Str::startsWith($route, ['not:']);
             })
             ->transform(function (Collection $routes, $index) {
-                return $index === 0
-                    ? $routes
-                    : $routes->transform(function ($route) { return substr($route, 4); });
+                if ($index === 0) {
+                    return $routes;
+                }
+
+                return $routes->transform(function ($route) {
+                    return substr($route, 4);
+                });
             })
             ->toArray();
     }

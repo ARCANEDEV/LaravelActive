@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\LaravelActive\Tests;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\LaravelActive\Tests;
 
 /**
  * Class     LaravelActiveServiceProviderTest
@@ -41,7 +45,7 @@ class LaravelActiveServiceProviderTest extends TestCase
      */
 
     /** @test */
-    public function it_can_be_instantiated()
+    public function it_can_be_instantiated(): void
     {
         $expectations = [
             \Illuminate\Support\ServiceProvider::class,
@@ -56,7 +60,7 @@ class LaravelActiveServiceProviderTest extends TestCase
     }
 
     /** @test */
-    public function it_can_provides()
+    public function it_can_provides(): void
     {
         $expected = [
             \Arcanedev\LaravelActive\Contracts\Active::class,

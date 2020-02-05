@@ -1,18 +1,6 @@
 <?php
 
-if ( ! function_exists('is_active')) {
-    /**
-     * Check if any of the given routes are active.
-     *
-     * @param  array  $routes
-     *
-     * @return bool
-     */
-    function is_active(array $routes)
-    {
-        return active()->isActive($routes);
-    }
-}
+declare(strict_types=1);
 
 if ( ! function_exists('active')) {
     /**
@@ -26,10 +14,27 @@ if ( ! function_exists('active')) {
      */
     function active($routes = [], $class = null, $fallback = null)
     {
+        /** @var  \Arcanedev\LaravelActive\Contracts\Active  $active */
         $active = app(Arcanedev\LaravelActive\Contracts\Active::class);
 
-        return empty($routes)
-            ? $active
-            : $active->active($routes, $class, $fallback);
+        if (empty($routes)) {
+            return $active;
+        }
+
+        return $active->active($routes, $class, $fallback);
+    }
+}
+
+if ( ! function_exists('is_active')) {
+    /**
+     * Check if any of the given routes are active.
+     *
+     * @param  array|string  $routes
+     *
+     * @return bool
+     */
+    function is_active($routes): bool
+    {
+        return active()->isActive($routes);
     }
 }
