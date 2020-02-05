@@ -1,6 +1,6 @@
 # LaravelActive [![Packagist License][badge_license]](LICENSE.md) [![For Laravel][badge_laravel]][link-github-repo]
 
-[![Travis Status][badge_build]][link-travis]
+[![Github Workflow Status][badge_build]][link-github-status]
 [![Coverage Status][badge_coverage]][link-scrutinizer]
 [![Scrutinizer Code Quality][badge_quality]][link-scrutinizer]
 [![SensioLabs Insight][badge_insight]][link-insight]
@@ -46,7 +46,7 @@ If you discover any security related issues, please email arcanedev.maroc@gmail.
 
 [badge_laravel]:      https://img.shields.io/badge/Laravel-5.4%20to%206.x-orange.svg?style=flat-square
 [badge_license]:      https://img.shields.io/packagist/l/arcanedev/laravel-active.svg?style=flat-square
-[badge_build]:        https://img.shields.io/travis/ARCANEDEV/LaravelActive.svg?style=flat-square
+[badge_build]:       https://img.shields.io/github/workflow/status/ARCANEDEV/LaravelActive/run-tests?style=flat-square
 [badge_coverage]:     https://img.shields.io/scrutinizer/coverage/g/ARCANEDEV/LaravelActive.svg?style=flat-square
 [badge_quality]:      https://img.shields.io/scrutinizer/g/ARCANEDEV/LaravelActive.svg?style=flat-square
 [badge_insight]:      https://img.shields.io/sensiolabs/i/adc894c0-cf91-4583-aacb-6c3ca94d121a.svg?style=flat-square
@@ -57,6 +57,7 @@ If you discover any security related issues, please email arcanedev.maroc@gmail.
 
 [link-author]:        https://github.com/arcanedev-maroc
 [link-github-repo]:   https://github.com/ARCANEDEV/LaravelActive
+[link-github-status]: https://github.com/ARCANEDEV/LaravelActive/actions
 [link-github-issues]: https://github.com/ARCANEDEV/LaravelActive/issues
 [link-contributors]:  https://github.com/ARCANEDEV/LaravelActive/graphs/contributors
 [link-packagist]:     https://packagist.org/packages/arcanedev/laravel-active

@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\LaravelActive\Contracts;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\LaravelActive\Contracts;
 
 /**
  * Interface     Active
