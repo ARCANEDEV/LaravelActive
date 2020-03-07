@@ -62,7 +62,7 @@ class ActiveTest extends TestCase
     {
         $this->get('foo');
 
-        static::assertTrue($this->active->isActive(['foo']));
+        static::assertTrue($this->active->is(['foo']));
         static::assertTrue($this->active->isPath(['foo']));
         static::assertFalse($this->active->isRoute(['foo']));
     }
@@ -72,7 +72,7 @@ class ActiveTest extends TestCase
     {
         $this->get('foo');
 
-        static::assertTrue($this->active->isActive('foo'));
+        static::assertTrue($this->active->is('foo'));
         static::assertTrue($this->active->isPath('foo'));
         static::assertFalse($this->active->isRoute('foo'));
     }
@@ -82,7 +82,7 @@ class ActiveTest extends TestCase
     {
         $this->get(route('home'));
 
-        static::assertTrue($this->active->isActive(['home']));
+        static::assertTrue($this->active->is(['home']));
         static::assertTrue($this->active->isRoute(['home']));
         static::assertFalse($this->active->isPath(['home']));
     }
@@ -99,7 +99,7 @@ class ActiveTest extends TestCase
         foreach ($expectations as $uri => $expected) {
             $this->call('GET', $uri);
 
-            static::assertSame($expected, $this->active->isActive(['foo/*', 'not:foo/qux']));
+            static::assertSame($expected, $this->active->is(['foo/*', 'not:foo/qux']));
             static::assertFalse($this->active->isRoute(['foo/*']));
         }
     }
@@ -116,7 +116,7 @@ class ActiveTest extends TestCase
         foreach ($expectations as $route => $expected) {
             $this->get(route($route));
 
-            static::assertSame($expected, $this->active->isActive(['pages.*', 'not:pages.show']));
+            static::assertSame($expected, $this->active->is(['pages.*', 'not:pages.show']));
         }
     }
 
@@ -153,7 +153,7 @@ class ActiveTest extends TestCase
     /** @test */
     public function it_must_return_false_when_the_given_route_or_path_not_active(): void
     {
-        static::assertFalse($this->active->isActive(['404']));
+        static::assertFalse($this->active->is(['404']));
         static::assertFalse($this->active->isRoute(['404']));
         static::assertFalse($this->active->isPath(['404']));
     }
@@ -167,16 +167,27 @@ class ActiveTest extends TestCase
     }
 
     /** @test */
-    public function it_can_fallback_with_custom_inactive_class_from_config_file(): void
+    public function it_can_fallback_with_custom_inactive_class_with_setter(): void
     {
         static::assertNull($this->active->active('blog'));
         static::assertNull($this->active->route('blog'));
         static::assertNull($this->active->path('blog'));
 
-        $this->app['config']->set('active.fallback-class', 'inactive');
+        $this->active->setFallbackClass('inactive');
 
         static::assertSame('inactive', $this->active->active('blog'));
         static::assertSame('inactive', $this->active->route('blog'));
         static::assertSame('inactive', $this->active->path('blog'));
+    }
+
+    /** @test */
+    public function it_can_set_request_instance(): void
+    {
+        $request = (new \Illuminate\Http\Request)
+            ->createFromBase(\Symfony\Component\HttpFoundation\Request::create('current-request', 'GET'));
+
+        $this->active->setRequest($request);
+
+        static::assertTrue($this->active->is(['current-request']));
     }
 }

@@ -37,6 +37,6 @@ if ( ! function_exists('is_active')) {
      */
     function is_active($routes): bool
     {
-        return active()->isActive($routes);
+        return active()->is($routes);
     }
 }

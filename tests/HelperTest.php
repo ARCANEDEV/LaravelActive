@@ -35,7 +35,7 @@ class HelperTest extends TestCase
     {
         $this->get('foo');
 
-        static::assertTrue(active()->isActive(['foo']));
+        static::assertTrue(active()->is(['foo']));
         static::assertTrue(active()->isPath(['foo']));
         static::assertFalse(active()->isRoute(['foo']));
     }
@@ -45,7 +45,7 @@ class HelperTest extends TestCase
     {
         $this->get('foo');
 
-        static::assertTrue(active()->isActive('foo'));
+        static::assertTrue(active()->is('foo'));
         static::assertTrue(active()->isPath('foo'));
         static::assertFalse(active()->isRoute('foo'));
     }
@@ -55,7 +55,7 @@ class HelperTest extends TestCase
     {
         $this->get(route('home'));
 
-        static::assertTrue(active()->isActive(['home']));
+        static::assertTrue(active()->is(['home']));
         static::assertTrue(active()->isRoute(['home']));
         static::assertFalse(active()->isPath(['home']));
     }
@@ -73,7 +73,7 @@ class HelperTest extends TestCase
         foreach ($expectations as $uri => $expected) {
             $this->get($uri);
 
-            static::assertSame($expected, active()->isActive($paths));
+            static::assertSame($expected, active()->is($paths));
             static::assertSame($expected, is_active($paths));
             static::assertSame($expected, active()->isPath($paths));
 
@@ -94,7 +94,7 @@ class HelperTest extends TestCase
         foreach ($expectations as $route => $expected) {
             $this->get(route($route));
 
-            static::assertSame($expected, active()->isActive($routes));
+            static::assertSame($expected, active()->is($routes));
             static::assertSame($expected, is_active($routes));
             static::assertSame($expected, active()->isRoute($routes));
 
@@ -143,7 +143,7 @@ class HelperTest extends TestCase
     /** @test */
     public function it_must_return_false_when_the_given_route_or_path_not_active(): void
     {
-        static::assertFalse(active()->isActive(['404']));
+        static::assertFalse(active()->is(['404']));
         static::assertFalse(is_active(['404']));
         static::assertFalse(active()->isRoute(['404']));
         static::assertFalse(active()->isPath(['404']));
@@ -158,16 +158,16 @@ class HelperTest extends TestCase
     }
 
     /** @test */
-    public function it_can_fallback_with_custom_inactive_class_from_config_file(): void
+    public function it_can_fallback_with_custom_inactive_class_via_setter(): void
     {
         static::assertNull(active('blog'));
         static::assertNull(active()->route('blog'));
         static::assertNull(active()->path('blog'));
 
-        $this->app['config']->set('active.fallback-class', 'inactive');
+        $active = active()->setFallbackClass('inactive');
 
-        static::assertSame('inactive', active('blog'));
-        static::assertSame('inactive', active()->route('blog'));
-        static::assertSame('inactive', active()->path('blog'));
+        static::assertSame('inactive', $active->active('blog'));
+        static::assertSame('inactive', $active->route('blog'));
+        static::assertSame('inactive', $active->path('blog'));
     }
 }
