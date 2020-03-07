@@ -10,6 +10,7 @@
 
 | LaravelActive                                 | Laravel                      |
 |:----------------------------------------------|:-----------------------------|
+| ![LaravelActive v3.x][laravel_active_3_x]     | ![Laravel v7.x][laravel_7_x] |
 | ![LaravelActive v2.x][laravel_active_2_x]     | ![Laravel v6.x][laravel_6_x] |
 | ![LaravelActive v1.4.x][laravel_active_1_4_x] | ![Laravel v5.8][laravel_5_8] |
 | ![LaravelActive v1.3.x][laravel_active_1_3_x] | ![Laravel v5.7][laravel_5_7] |
@@ -17,6 +18,7 @@
 | ![LaravelActive v1.1.x][laravel_active_1_1_x] | ![Laravel v5.5][laravel_5_5] |
 | ![LaravelActive v1.0.x][laravel_active_1_0_x] | ![Laravel v5.4][laravel_5_4] |
 
+[laravel_7_x]:  https://img.shields.io/badge/v7.x-supported-brightgreen.svg?style=flat-square "Laravel v7.x"
 [laravel_6_x]:  https://img.shields.io/badge/v6.x-supported-brightgreen.svg?style=flat-square "Laravel v6.x"
 [laravel_5_8]:  https://img.shields.io/badge/v5.8-supported-brightgreen.svg?style=flat-square "Laravel v5.8"
 [laravel_5_7]:  https://img.shields.io/badge/v5.7-supported-brightgreen.svg?style=flat-square "Laravel v5.7"
@@ -24,6 +26,7 @@
 [laravel_5_5]:  https://img.shields.io/badge/v5.5-supported-brightgreen.svg?style=flat-square "Laravel v5.5"
 [laravel_5_4]:  https://img.shields.io/badge/v5.4-supported-brightgreen.svg?style=flat-square "Laravel v5.4"
 
+[laravel_active_3_x]:    https://img.shields.io/badge/version-3.x-blue.svg?style=flat-square "LaravelActive v3.x"
 [laravel_active_2_x]:    https://img.shields.io/badge/version-2.x-blue.svg?style=flat-square "LaravelActive v2.x"
 [laravel_active_1_4_x]:  https://img.shields.io/badge/version-1.4.x-blue.svg?style=flat-square "LaravelActive v1.4.x"
 [laravel_active_1_3_x]:  https://img.shields.io/badge/version-1.3.x-blue.svg?style=flat-square "LaravelActive v1.3.x"

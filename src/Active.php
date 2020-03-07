@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace Arcanedev\LaravelActive;
 
 use Arcanedev\LaravelActive\Contracts\Active as ActiveContract;
-use Illuminate\Contracts\Config\Repository;
-use Illuminate\Support\{Arr, Collection, Str};
+use Illuminate\Support\{
+    Arr,
+    Collection,
+    Str};
+use Illuminate\Http\Request;
 
 /**
  * Class     Active
@@ -21,12 +24,14 @@ class Active implements ActiveContract
      | -----------------------------------------------------------------
      */
 
-    /**
-     * Illuminate Config instance.
-     *
-     * @var \Illuminate\Contracts\Config\Repository
-     */
-    protected $config;
+    /** @var  string */
+    protected $activeClass;
+
+    /** @var  string */
+    protected $fallbackClass;
+
+    /** @var  \Illuminate\Http\Request */
+    protected $request;
 
     /* -----------------------------------------------------------------
      |  Constructor
@@ -36,11 +41,12 @@ class Active implements ActiveContract
     /**
      * Active constructor.
      *
-     * @param  \Illuminate\Contracts\Config\Repository  $config
+     * @param  array  $options
      */
-    public function __construct(Repository $config)
+    public function __construct(array $options)
     {
-        $this->config = $config;
+        $this->setActiveClass(Arr::get($options, 'class', 'active'));
+        $this->setFallbackClass(Arr::get($options, 'fallback-class'));
     }
 
     /* -----------------------------------------------------------------
@@ -49,46 +55,81 @@ class Active implements ActiveContract
      */
 
     /**
-     * Get the active CSS class.
-     *
-     * @param  string|null  $class
+     * Get the `active` CSS class.
      *
      * @return string
      */
-    protected function getActiveClass($class = null)
+    public function getActiveClass(): string
     {
-        return $class ?: $this->config->get('active.class', 'active');
+        return $this->activeClass;
+    }
+
+    /**
+     * Set the `active` CSS class.
+     *
+     * @param  string  $class
+     *
+     * @return $this
+     */
+    public function setActiveClass(string $class)
+    {
+        $this->activeClass = $class;
+
+        return $this;
     }
 
     /**
      * Get the fallback (inactive) class.
      *
-     * @param  string|null  $fallback
-     *
      * @return string|null
      */
-    protected function getFallbackClass($fallback = null)
+    public function getFallbackClass(): ?string
     {
-        return $fallback ?: $this->config->get('active.fallback-class');
+        return $this->fallbackClass;
+    }
+
+    /**
+     * Set the fallback (inactive) class.
+     *
+     * @param  string|null  $class
+     *
+     * @return $this
+     */
+    public function setFallbackClass(?string $class)
+    {
+        $this->fallbackClass = $class;
+
+        return $this;
+    }
+
+    /**
+     * Get the request.
+     *
+     * @return \Illuminate\Http\Request
+     */
+    public function getRequest(): Request
+    {
+        return $this->request ?: app('request');
+    }
+
+    /**
+     * Set the request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return $this
+     */
+    public function setRequest(Request $request)
+    {
+        $this->request = $request;
+
+        return $this;
     }
 
     /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
      */
-
-    /**
-     * Check if any given routes/paths are active.
-     *
-     * @param  string|array  $routes
-     *
-     * @return bool
-     */
-    public function isActive($routes): bool
-    {
-        return $this->isPath($routes)
-            || $this->isRoute($routes);
-    }
 
     /**
      * Get the active class if the current path/route is active.
@@ -102,7 +143,7 @@ class Active implements ActiveContract
     public function active($routes, $class = null, $fallback = null)
     {
         return $this->getCssClass(
-            $this->isActive($routes), $class, $fallback
+            $this->is($routes), $class, $fallback
         );
     }
 
@@ -139,6 +180,19 @@ class Active implements ActiveContract
     }
 
     /**
+     * Check if any given routes/paths are active.
+     *
+     * @param  string|array  $routes
+     *
+     * @return bool
+     */
+    public function is($routes): bool
+    {
+        return $this->isPath($routes)
+            || $this->isRoute($routes);
+    }
+
+    /**
      * Check if the current route is one of the given routes.
      *
      * @param  string|array  $routes
@@ -147,7 +201,13 @@ class Active implements ActiveContract
      */
     public function isRoute($routes): bool
     {
-        return $this->is(app('router'), $routes);
+        list($patterns, $ignored) = $this->parseRoutes(Arr::wrap($routes));
+
+        if ($this->isIgnored($ignored)) {
+            return false;
+        }
+
+        return $this->getRequest()->routeIs($patterns);
     }
 
     /**
@@ -159,7 +219,13 @@ class Active implements ActiveContract
      */
     public function isPath($routes): bool
     {
-        return $this->is(app('request'), $routes);
+        list($routes, $ignored) = $this->parseRoutes(Arr::wrap($routes));
+
+        if ($this->isIgnored($ignored)) {
+            return false;
+        }
+
+        return $this->getRequest()->is($routes);
     }
 
     /* -----------------------------------------------------------------
@@ -168,38 +234,19 @@ class Active implements ActiveContract
      */
 
     /**
-     * Get the css class based on the given condition.
+     * Get the css class based on the given active state.
      *
-     * @param  bool         $condition
+     * @param  bool         $isActive
      * @param  string|null  $class
      * @param  string|null  $fallback
      *
      * @return string|null
      */
-    protected function getCssClass($condition, $class, $fallback): ?string
+    protected function getCssClass(bool $isActive, ?string $class = null, ?string $fallback = null): ?string
     {
-        return $condition
-            ? $this->getActiveClass($class)
-            : $this->getFallbackClass($fallback);
-    }
-
-    /**
-     * Check if one the given routes is active.
-     *
-     * @param  mixed         $router
-     * @param  string|array  $routes
-     *
-     * @return bool
-     */
-    protected function is($router, $routes): bool
-    {
-        list($routes, $ignored) = $this->parseRoutes(Arr::wrap($routes));
-
-        if ($this->isIgnored($ignored)) {
-            return false;
-        }
-
-        return call_user_func_array([$router, 'is'], $routes);
+        return $isActive
+            ? ($class ?: $this->getActiveClass())
+            : ($fallback ?: $this->getFallbackClass());
     }
 
     /**

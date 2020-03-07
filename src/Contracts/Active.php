@@ -57,7 +57,7 @@ interface Active
      *
      * @return bool
      */
-    public function isActive($routes);
+    public function is($routes);
 
     /**
      * Check if the current route is one of the given routes.
