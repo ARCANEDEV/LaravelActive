@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Arcanedev\LaravelActive\Contracts\Active;
+
 if ( ! function_exists('active')) {
     /**
      * Get the active class if the current route/path matches with the haystack.
@@ -15,7 +17,7 @@ if ( ! function_exists('active')) {
     function active($routes = [], $class = null, $fallback = null)
     {
         /** @var  \Arcanedev\LaravelActive\Contracts\Active  $active */
-        $active = app(Arcanedev\LaravelActive\Contracts\Active::class);
+        $active = app(Active::class);
 
         if (empty($routes)) {
             return $active;

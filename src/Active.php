@@ -186,12 +186,12 @@ class Active implements ActiveContract
     /**
      * Check if one the given routes is active.
      *
-     * @param  mixed         $object
+     * @param  mixed         $router
      * @param  string|array  $routes
      *
      * @return bool
      */
-    protected function is($object, $routes): bool
+    protected function is($router, $routes): bool
     {
         list($routes, $ignored) = $this->parseRoutes(Arr::wrap($routes));
 
@@ -199,7 +199,7 @@ class Active implements ActiveContract
             return false;
         }
 
-        return call_user_func_array([$object, 'is'], $routes);
+        return call_user_func_array([$router, 'is'], $routes);
     }
 
     /**

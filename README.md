@@ -44,16 +44,16 @@ If you discover any security related issues, please email arcanedev.maroc@gmail.
 - [ARCANEDEV][link-author]
 - [All Contributors][link-contributors]
 
-[badge_laravel]:      https://img.shields.io/badge/Laravel-5.4%20to%206.x-orange.svg?style=flat-square
-[badge_license]:      https://img.shields.io/packagist/l/arcanedev/laravel-active.svg?style=flat-square
-[badge_build]:       https://img.shields.io/github/workflow/status/ARCANEDEV/LaravelActive/run-tests?style=flat-square
-[badge_coverage]:     https://img.shields.io/scrutinizer/coverage/g/ARCANEDEV/LaravelActive.svg?style=flat-square
-[badge_quality]:      https://img.shields.io/scrutinizer/g/ARCANEDEV/LaravelActive.svg?style=flat-square
-[badge_insight]:      https://img.shields.io/sensiolabs/i/adc894c0-cf91-4583-aacb-6c3ca94d121a.svg?style=flat-square
-[badge_issues]:       https://img.shields.io/github/issues/ARCANEDEV/LaravelActive.svg?style=flat-square
-[badge_package]:      https://img.shields.io/badge/package-arcanedev/laravel--active-blue.svg?style=flat-square
-[badge_release]:      https://img.shields.io/packagist/v/arcanedev/laravel-active.svg?style=flat-square
-[badge_downloads]:    https://img.shields.io/packagist/dt/arcanedev/laravel-active.svg?style=flat-square
+[badge_laravel]:   https://img.shields.io/badge/Laravel-5.4%20to%206.x-orange.svg?style=flat-square
+[badge_license]:   https://img.shields.io/packagist/l/arcanedev/laravel-active.svg?style=flat-square
+[badge_build]:     https://img.shields.io/github/workflow/status/ARCANEDEV/LaravelActive/run-tests?style=flat-square
+[badge_coverage]:  https://img.shields.io/scrutinizer/coverage/g/ARCANEDEV/LaravelActive.svg?style=flat-square
+[badge_quality]:   https://img.shields.io/scrutinizer/g/ARCANEDEV/LaravelActive.svg?style=flat-square
+[badge_insight]:   https://img.shields.io/sensiolabs/i/adc894c0-cf91-4583-aacb-6c3ca94d121a.svg?style=flat-square
+[badge_issues]:    https://img.shields.io/github/issues/ARCANEDEV/LaravelActive.svg?style=flat-square
+[badge_package]:   https://img.shields.io/badge/package-arcanedev/laravel--active-blue.svg?style=flat-square
+[badge_release]:   https://img.shields.io/packagist/v/arcanedev/laravel-active.svg?style=flat-square
+[badge_downloads]: https://img.shields.io/packagist/dt/arcanedev/laravel-active.svg?style=flat-square
 
 [link-author]:        https://github.com/arcanedev-maroc
 [link-github-repo]:   https://github.com/ARCANEDEV/LaravelActive

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Arcanedev\LaravelActive;
 
+use Arcanedev\LaravelActive\Contracts\Active as ActiveContract;
 use Arcanedev\Support\Providers\PackageServiceProvider;
 use Illuminate\Contracts\Support\DeferrableProvider;
 
@@ -41,7 +42,7 @@ class LaravelActiveServiceProvider extends PackageServiceProvider implements Def
 
         $this->registerConfig();
 
-        $this->singleton(Contracts\Active::class, Active::class);
+        $this->singleton(ActiveContract::class, Active::class);
     }
 
     /**
@@ -49,7 +50,9 @@ class LaravelActiveServiceProvider extends PackageServiceProvider implements Def
      */
     public function boot(): void
     {
-        $this->publishConfig();
+        if ($this->app->runningInConsole()) {
+            $this->publishConfig();
+        }
     }
 
     /**
@@ -60,7 +63,7 @@ class LaravelActiveServiceProvider extends PackageServiceProvider implements Def
     public function provides(): array
     {
         return [
-            Contracts\Active::class,
+            ActiveContract::class,
         ];
     }
 }
