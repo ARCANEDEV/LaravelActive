@@ -7,7 +7,6 @@ namespace Arcanedev\LaravelActive\Tests;
 /**
  * Class     HelperTest
  *
- * @package  Arcanedev\LaravelActive\Tests
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class HelperTest extends TestCase

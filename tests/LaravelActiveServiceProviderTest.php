@@ -7,7 +7,6 @@ namespace Arcanedev\LaravelActive\Tests;
 /**
  * Class     LaravelActiveServiceProviderTest
  *
- * @package  Arcanedev\LaravelActive\Tests
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class LaravelActiveServiceProviderTest extends TestCase
