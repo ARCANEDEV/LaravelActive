@@ -4,7 +4,7 @@ A Laravel helper to detect if the current route is active.
 
 ### Features
   
-  * Laravel `5.4` to `7.x` are supported.
+  * Laravel `5.4` to `8.x` are supported.
   * Well tested (100% code coverage with maximum code quality).
   * Well documented &amp; IDE Friendly.
   * Made with :heart: &amp; :coffee:.

@@ -5,16 +5,12 @@ declare(strict_types=1);
 namespace Arcanedev\LaravelActive;
 
 use Arcanedev\LaravelActive\Contracts\Active as ActiveContract;
-use Illuminate\Support\{
-    Arr,
-    Collection,
-    Str};
+use Illuminate\Support\{Arr, Collection, Str};
 use Illuminate\Http\Request;
 
 /**
  * Class     Active
  *
- * @package  Arcanedev\LaravelActive
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class Active implements ActiveContract

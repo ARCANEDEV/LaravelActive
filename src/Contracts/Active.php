@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace Arcanedev\LaravelActive\Contracts;
 
 /**
- * Interface     Active
+ * Interface  Active
  *
- * @package  Arcanedev\LaravelActive\Contracts
- * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 interface Active
 {

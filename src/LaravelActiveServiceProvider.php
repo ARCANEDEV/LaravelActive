@@ -6,13 +6,11 @@ namespace Arcanedev\LaravelActive;
 
 use Arcanedev\LaravelActive\Contracts\Active as ActiveContract;
 use Arcanedev\Support\Providers\PackageServiceProvider;
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Support\DeferrableProvider;
 
 /**
  * Class     LaravelActiveServiceProvider
  *
- * @package  Arcanedev\LaravelActive
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class LaravelActiveServiceProvider extends PackageServiceProvider implements DeferrableProvider
@@ -44,9 +42,7 @@ class LaravelActiveServiceProvider extends PackageServiceProvider implements Def
         $this->registerConfig();
 
         $this->singleton(ActiveContract::class, function ($app) {
-            $options = $app['config']->get('active', []);
-
-            return new Active($options);
+            return new Active($app['config']['active'] ?? []);
         });
     }
 
