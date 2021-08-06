@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanedev\LaravelActive\Tests;
 
@@ -24,6 +22,7 @@ class LaravelActiveServiceProviderTest extends TestCase
      | -----------------------------------------------------------------
      */
 
+    /** {@inheritDoc} */
     protected function setUp(): void
     {
         parent::setUp();
@@ -31,6 +30,7 @@ class LaravelActiveServiceProviderTest extends TestCase
         $this->provider = $this->app->getProvider(\Arcanedev\LaravelActive\LaravelActiveServiceProvider::class);
     }
 
+    /** {@inheritDoc} */
     protected function tearDown(): void
     {
         unset($this->provider);

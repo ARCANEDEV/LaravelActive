@@ -18,7 +18,8 @@
         "arcanedev/support": "^8.0"
     },
     "require-dev": {
-        "orchestra/testbench": "^6.4",
+        "laravel/framework": "^8.0",
+        "orchestra/testbench-core": "^6.4",
         "phpunit/phpunit": "^9.3.3"
     },
     "autoload": {
@@ -33,8 +34,9 @@
         }
     },
     "scripts": {
-        "test": "phpunit",
-        "coverage": "phpunit --coverage-html build/coverage/html"
+        "test": "phpunit --colors=always",
+        "test:dox": "phpunit --testdox --colors=always",
+        "test:cov": "phpunit --coverage-html coverage"
     },
     "extra": {
         "branch-alias": {

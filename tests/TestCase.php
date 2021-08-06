@@ -1,9 +1,8 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanedev\LaravelActive\Tests;
 
+use Illuminate\Contracts\Routing\Registrar;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
 /**
@@ -18,13 +17,7 @@ abstract class TestCase extends BaseTestCase
      | -----------------------------------------------------------------
      */
 
-    /**
-     * Get package providers.
-     *
-     * @param  \Illuminate\Foundation\Application  $app
-     *
-     * @return array
-     */
+    /** {@inheritDoc} */
     protected function getPackageProviders($app): array
     {
         return [
@@ -32,11 +25,7 @@ abstract class TestCase extends BaseTestCase
         ];
     }
 
-    /**
-     * Define environment setup.
-     *
-     * @param  \Illuminate\Foundation\Application  $app
-     */
+    /** {@inheritDoc} */
     protected function getEnvironmentSetUp($app): void
     {
         parent::getEnvironmentSetUp($app);
@@ -49,7 +38,7 @@ abstract class TestCase extends BaseTestCase
      *
      * @param  \Illuminate\Contracts\Routing\Registrar  $router
      */
-    private function setUpRoutes($router): void
+    private function setUpRoutes(Registrar $router): void
     {
         $router->get('/', function () { return 'Homepage'; })
                ->name('home');

@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanedev\LaravelActive;
 
@@ -139,7 +137,9 @@ class Active implements ActiveContract
     public function active($routes, $class = null, $fallback = null)
     {
         return $this->getCssClass(
-            $this->is($routes), $class, $fallback
+            $this->is($routes),
+            $class,
+            $fallback
         );
     }
 
@@ -155,7 +155,9 @@ class Active implements ActiveContract
     public function route($routes, $class = null, $fallback = null)
     {
         return $this->getCssClass(
-            $this->isRoute($routes), $class, $fallback
+            $this->isRoute($routes),
+            $class,
+            $fallback
         );
     }
 
@@ -171,7 +173,9 @@ class Active implements ActiveContract
     public function path($routes, $class = null, $fallback = null)
     {
         return $this->getCssClass(
-            $this->isPath($routes), $class, $fallback
+            $this->isPath($routes),
+            $class,
+            $fallback
         );
     }
 
@@ -221,7 +225,10 @@ class Active implements ActiveContract
             return false;
         }
 
-        return $this->getRequest()->is($routes);
+        return with($this->getRequest(), function (Request $request) use ($routes) {
+            return $request->is($routes)
+                || $request->fullUrlIs($routes);
+        });
     }
 
     /* -----------------------------------------------------------------
@@ -280,6 +287,7 @@ class Active implements ActiveContract
                     return substr($route, 4);
                 });
             })
-            ->toArray();
+            ->toArray()
+        ;
     }
 }

@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Arcanedev\LaravelActive\Tests;
 
@@ -24,6 +22,7 @@ class ActiveTest extends TestCase
      | -----------------------------------------------------------------
      */
 
+    /** {@inheritDoc} */
     protected function setUp(): void
     {
         parent::setUp();
@@ -31,6 +30,7 @@ class ActiveTest extends TestCase
         $this->active = $this->app->make(\Arcanedev\LaravelActive\Contracts\Active::class);
     }
 
+    /** {@inheritDoc} */
     protected function tearDown(): void
     {
         unset($this->active);
@@ -84,6 +84,17 @@ class ActiveTest extends TestCase
         static::assertTrue($this->active->is(['home']));
         static::assertTrue($this->active->isRoute(['home']));
         static::assertFalse($this->active->isPath(['home']));
+    }
+
+    /** @test */
+    public function it_can_check_if_current_full_url_is_active(): void
+    {
+        $this->get($url = route('pages.index'));
+
+        static::assertSame("{$this->baseUrl}/pages", $url);
+        static::assertTrue($this->active->is($url));
+
+        static::assertFalse($this->active->is("{$this->baseUrl}/blog"));
     }
 
     /** @test */
