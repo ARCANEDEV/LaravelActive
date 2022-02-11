@@ -18,14 +18,11 @@ class Active implements ActiveContract
      | -----------------------------------------------------------------
      */
 
-    /** @var  string */
-    protected $activeClass;
+    protected string $activeClass;
 
-    /** @var  string */
-    protected $fallbackClass;
+    protected ?string $fallbackClass;
 
-    /** @var  \Illuminate\Http\Request */
-    protected $request;
+    protected ?Request $request;
 
     /* -----------------------------------------------------------------
      |  Constructor
@@ -34,8 +31,6 @@ class Active implements ActiveContract
 
     /**
      * Active constructor.
-     *
-     * @param  array  $options
      */
     public function __construct(array $options)
     {
@@ -50,8 +45,6 @@ class Active implements ActiveContract
 
     /**
      * Get the `active` CSS class.
-     *
-     * @return string
      */
     public function getActiveClass(): string
     {
@@ -60,12 +53,8 @@ class Active implements ActiveContract
 
     /**
      * Set the `active` CSS class.
-     *
-     * @param  string  $class
-     *
-     * @return $this
      */
-    public function setActiveClass(string $class)
+    public function setActiveClass(string $class): static
     {
         $this->activeClass = $class;
 
@@ -74,8 +63,6 @@ class Active implements ActiveContract
 
     /**
      * Get the fallback (inactive) class.
-     *
-     * @return string|null
      */
     public function getFallbackClass(): ?string
     {
@@ -84,12 +71,8 @@ class Active implements ActiveContract
 
     /**
      * Set the fallback (inactive) class.
-     *
-     * @param  string|null  $class
-     *
-     * @return $this
      */
-    public function setFallbackClass(?string $class)
+    public function setFallbackClass(?string $class): static
     {
         $this->fallbackClass = $class;
 
@@ -98,22 +81,16 @@ class Active implements ActiveContract
 
     /**
      * Get the request.
-     *
-     * @return \Illuminate\Http\Request
      */
     public function getRequest(): Request
     {
-        return $this->request ?: app('request');
+        return $this->request ?? app('request');
     }
 
     /**
      * Set the request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     *
-     * @return $this
      */
-    public function setRequest(Request $request)
+    public function setRequest(Request $request): static
     {
         $this->request = $request;
 
@@ -238,12 +215,6 @@ class Active implements ActiveContract
 
     /**
      * Get the css class based on the given active state.
-     *
-     * @param  bool         $isActive
-     * @param  string|null  $class
-     * @param  string|null  $fallback
-     *
-     * @return string|null
      */
     protected function getCssClass(bool $isActive, ?string $class = null, ?string $fallback = null): ?string
     {
@@ -254,10 +225,6 @@ class Active implements ActiveContract
 
     /**
      * Check if the given routes/paths are ignored.
-     *
-     * @param  array  $ignored
-     *
-     * @return bool
      */
     protected function isIgnored(array $ignored): bool
     {
@@ -267,10 +234,6 @@ class Active implements ActiveContract
 
     /**
      * Separate ignored routes from the whitelist routes.
-     *
-     * @param  array  $allRoutes
-     *
-     * @return array
      */
     protected function parseRoutes(array $allRoutes): array
     {
